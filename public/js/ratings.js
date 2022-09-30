@@ -236,6 +236,52 @@ function getCurrentWeather(city) {
 //! -----------------------------------------------------------------------------------------------------------
 //  TODO: Implement search by ingredient function
 
+var searchIngredientEl = document.querySelector("#search-ingredient-form");
+
+function getCocktailFromIngredient(ingredientName) {
+  fetch(
+    "http://localhost:3001/api/cocktails/ing/" + ingredientName
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      const dataObject = {data: data};
+        const template = Handlebars.compile(document.querySelector("#template2").innerHTML);
+    const filled = template(dataObject);
+    console.log("Filled: ", filled);
+    console.log(filled);
+    document.querySelector('#output2').innerHTML = filled;
+    });
+}
+
+function handleIngredientFormSubmit(e) {
+  e.preventDefault();
+  var searchInputVal = document.querySelector("#search-ingredient-input").value;
+
+  if (!searchInputVal) {
+    console.log("Invalid Input!");
+    return;
+  }
+  getCocktailFromIngredient(searchInputVal);
+}
+
+searchIngredientEl.addEventListener("submit", handleIngredientFormSubmit);
+
 //! -----------------------------------------------------------------------------------------------------------
 //  TODO: Implement search by drink name
+
+searchNameEl = document.querySelector("#name-search");
+
+searchNameEl.addEventListener("submit", searchNameSubmit);
+
+function searchNameSubmit(e) {
+  e.preventDefault();
+  
+}
+
+function searchName(drinkURL) {
+
+}
 

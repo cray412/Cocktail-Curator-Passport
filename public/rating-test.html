@@ -77,6 +77,54 @@
 
 </div>
 
+<!--! Start Ingredient Search ------------------------------------------->
+<div>
+  <form id="search-ingredient-form">
+      <label id="search-ingredient-label" for="search-input">Search by Ingredient:</label>
+      <input id="search-ingredient-input" class="form-input" placeholder="e.g. Vodka"></input>
+      <button class="button">Search</button>
+      <p id="#search-ingrdient"></p>
+  </form>
+</div>
+
+<script type="x-handlebars-template" id="template2">
+  {{#each data}}
+      
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-3">
+        <div class="col mb-4">
+          <div class="card h-100" style="max-width: 24rem;">
+            <img src="{{this.image}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title text-primary">{{this.name}}</h5>
+              <button class="btn btn-primary" type="submit">Recipe</button>
+            </div>
+          </div>
+        </div>
+  </div>
+  </div>
+
+  {{/each}}  
+
+</script>
+
+
+<div id="output2">
+
+</div>
+
+<!-- End Ingredient Search ------------------------------------------>
+
+<div>
+  <form id="name-search">
+      <label for="cocktail-name">Search for cocktail by name</label>
+      <input type="cocktail-name" placeholder="For example 'margarita'">
+      <button class="button">Search</button>
+  </form>
+</div>
+
+
+
 <script src="./js/ratings.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
