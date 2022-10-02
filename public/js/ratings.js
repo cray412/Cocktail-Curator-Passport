@@ -230,10 +230,21 @@ function getCurrentWeather(city) {
     console.log(filled);
     document.querySelector('#output').innerHTML = filled;
 
+    const card = document.querySelector("#card1");
+
+  card.addEventListener("click", () => {
+    
+
+    let drinkClicked = document.querySelector("#cocktail-name").innerHTML;
+    console.log("This is the drink you clicked", drinkClicked);
+    localStorage.setItem("cocktail", drinkClicked);
+    const drinkFromStroage = localStorage.getItem("cocktail");
+    console.log("Here is the drink returned from localstorage: ", drinkFromStroage);
+  })
+
     })
   }
 
-//! -----------------------------------------------------------------------------------------------------------
 //  TODO: Implement search by ingredient function
 
 var searchIngredientEl = document.querySelector("#search-ingredient-form");
@@ -253,6 +264,24 @@ function getCocktailFromIngredient(ingredientName) {
     console.log("Filled: ", filled);
     console.log(filled);
     document.querySelector('#output2').innerHTML = filled;
+
+    //!-----------------------Almost working
+    //selectAll cards with a data-attribute
+    //log them
+    //for each card, set an event listener that waits for a click
+    // then do something?? To link to recipe page
+    // Make the event listener on the button
+    // Then find the sibling
+      const cards = document.querySelectorAll("div[data-attribute]");
+      console.log(cards);
+      cards.forEach((card) => {
+        card.addEventListener("click", function(e) {
+          console.log("Event: ",e)
+          var targetedCard = e.target;
+          console.log(targetedCard); 
+        })
+      })
+//!-------------------------------------------------
     });
 }
 
@@ -278,10 +307,22 @@ searchNameEl.addEventListener("submit", searchNameSubmit);
 
 function searchNameSubmit(e) {
   e.preventDefault();
-  
+  let drinkUrl = "http://localhost:3001/api/cocktails/name/"
+  let drinkInputVal = document.querySelector("#name").value;
+  drinkUrl+= drinkInputVal;
+  searchName(drinkUrl);
 }
 
-function searchName(drinkURL) {
-
+function searchName(drinkUrl) {
+  fetch(drinkUrl)
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data);
+    const template = Handlebars.compile(document.querySelector("#template").innerHTML);
+    const filled = template(data);
+    console.log(filled);
+    document.querySelector('#output3').innerHTML = filled;
+  })
 }
-
